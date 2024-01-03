@@ -1,0 +1,40 @@
+.tamanho { 
+    height: 80%;
+}
+
+.btn-fechar-modal {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-fechar-modal button {
+    font-size: 20px;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.tabela {
+    height: 80%;
+    overflow-y: auto;
+}
+
+.fundo {
+    width: 90% !important;
+    height: 90%;
+    margin: 25px auto;
+}
+
+.fundo-modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: #00000052;
+}
+
+.btn_busca_preco {
+    padding: 1px 9px;
+}
+
+.slds-var-m-around_medium {
+    margin: 0 0 15px 0; 
+}

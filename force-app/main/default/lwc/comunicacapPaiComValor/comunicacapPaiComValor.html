@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Esse é o componente pai">
+        <lightning-input
+            class="slds-p-around_medium"
+            type="text"
+            label="Digite o seu nome"
+            onchange={getValorNome}
+            value={valorInputPai}>
+        </lightning-input>
+
+        <c-comunicacao-filho-com-valor
+            valor-vindo-do-pai={valorInputPai}
+            onlimpainput={limpaInput}>            
+        </c-comunicacao-filho-com-valor>
+    </lightning-card>
+</template>

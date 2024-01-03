@@ -1,0 +1,31 @@
+<template>
+    <ul>
+        <template lwc:if={disablePrevious}>
+            <li onclick={previousHandler}>
+                <i class="fa-solid fa-chevron-left"></i>
+            </li>
+        </template>
+
+        <template lwc:if={temPaginas}>
+            <template iterator:page={paginas}>
+                <template lwc:if={page.first}>
+                    <li class="numeracao currentPage" key={page.value} data-value={page.value}
+                        onclick={mudarPaginaSelecionada}>
+                        {page.value}
+                    </li>
+                </template>
+                <template lwc:else>
+                    <li class="numeracao" key={page.value} data-value={page.value} onclick={mudarPaginaSelecionada}>
+                        {page.value}
+                    </li>
+                </template>
+            </template>
+        </template>
+
+        <template lwc:if={disableNext}>
+            <li onclick={nextHandler}>
+                <i class="fa-solid fa-chevron-right"></i>
+            </li>
+        </template>
+    </ul>
+</template>

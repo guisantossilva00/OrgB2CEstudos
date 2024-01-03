@@ -1,0 +1,78 @@
+<template>
+    <div class="container-conteudo">
+        <section class="voltar" onclick={eventoTabelaFormSolicitacao}>
+            <i class="fa-solid fa-arrow-left"></i>
+            
+            <p>Voltar</p>
+        </section>
+
+        <section class="formulario">
+            <div class="inputText">
+                <label for="nome-colaborador">Nome do Colaborador</label>
+                <input type="text" id="nome-colaborador" name="nome-colaborador" onkeyup={changeInputColaborador} class="colaborador">
+                <template lwc:if={pesquisaColaborador}>
+                    <ul>
+                        <template for:each={colaboradores} for:item="colaborador">
+                            <li key={colaborador.Id} onclick={selecionaColaborador} data-id={colaborador.Id} data-name={colaborador.Name} >{colaborador.Name}</li>
+                        </template>
+                    </ul>
+                </template>                
+            </div>
+
+            <div>
+                <label for="cargo">Cargo</label>
+                <select class="slds-select" id="cargo" name="cargo">
+                    <option value="" selected disabled>--Nenhum--</option>
+                    <option value="Analista">Analista</option>
+                    <option value="Analista de Faturamento">Analista de Faturamento</option>
+                    <option value="Analista TI">Analista TI</option>
+                    <option value="Assistente Administrativo">Assistente Administrativo</option>
+                    <option value="Balanceiro">Balanceiro</option>
+                    <option value="Controlador de Tráfego">Controlador de Tráfego</option>
+                    <option value="Eletricista de Manutenção">Eletricista de Manutenção</option> 
+                    <option value="Estagiário">Estagiário</option> 
+                    <option value="Gerente de logística">Gerente de logística</option> 
+                    <option value="Mecânico">Mecânico</option> 
+                    <option value="Motorista Caminhão">Motorista Caminhão</option> 
+                    <option value="Operador de Extração">Operador de Extração</option> 
+                    <option value="Operador Máquinas">Operador Máquinas</option> 
+                    <option value="Supervisor">Supervisor</option> 
+                </select>
+            </div>
+
+            <div>
+                <label for="local">Local</label>
+                <select class="slds-select" id="local" name="local">
+                    <option selected disabled>--Nenhum--</option>
+                    <option value="Junqueirópolis">Junqueirópolis</option>
+                    <option value="Guararapes">Guararapes</option>
+                    <option value="São Paulo">São Paulo</option>
+                </select>
+            </div>
+            
+            <div class="inputText">
+                <label for="nome-gestor">Gestor Imediato</label>
+                <input type="text" onkeyup={changeInputGestor} id="nome-gestor" name="nome-gestor" class="colaborador">
+
+                <template lwc:if={pesquisaGestor}>
+                    <ul>
+                        <template for:each={gestores} for:item="ges">
+                            <li key={ges.Id} onclick={selecionaGestor} data-id={ges.Id} data-name={ges.Name} >{ges.Name}</li>
+                        </template>
+                    </ul>
+                </template>         
+            </div>
+
+            <div>
+                <label for="tipo-ferias">Tipo de férias</label>
+                <select class="slds-select" id="tipo-ferias" name="tipo-ferias">
+                    <option value="" selected disabled>--Nenhum--</option>
+                    <option value="Férias individuais">Férias individuais</option>
+                    <option value="Férias fracionadas">Férias fracionadas</option>
+                    <option value="Férias coletivas">Férias coletivas</option>
+                </select>
+            </div>
+        </section>
+        <button onclick={criarSolicitacaoFerias}>Salvar</button>
+    </div>
+</template>

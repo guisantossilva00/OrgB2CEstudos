@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Aluno">
+
+        <lightning-input type="text" label="Nome do Aluno" onchange={obterNomeAluno}></lightning-input>
+        <lightning-input type="text" label="Sala do Aluno" onchange={obterSalaAluno}></lightning-input>
+        <lightning-input type="text" label="Turma do Aluno" onchange={obterTurmaAluno}></lightning-input>
+
+        <template lwc:if={liberar}>
+            <h2>Nome: {aluno.nome}</h2>
+            <p>Sala: {aluno.sala}</p>
+            <p>Turma: {aluno.turma}</p>
+        </template>
+        
+        <template lwc:else>
+            <p>Sem dados para o aluno</p>
+        </template>
+    
+        <template for:each={listaAlunos} for:item="alunoDentroFor">
+            <p key={alunoDentroFor.id}>{alunoDentroFor.nome}</p>
+        </template>
+    </lightning-card>
+</template>

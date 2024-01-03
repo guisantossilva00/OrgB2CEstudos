@@ -1,0 +1,24 @@
+<apex:page standardController="OpportunityLineItem" showHeader="false" lightningStyleSheets="true">
+    <style type="text/css">
+        #compContainer {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+    <apex:includeLightning />
+    <div id="compContainer"> </div>
+    <script>
+     $Lightning.use("c:LightningOutApp",function() {
+         $Lightning.createComponent("c:modal",
+          {
+              recordId : 'idaqui'
+          },
+          "compContainer",
+          function(cmp) {
+               console.log("c:VFPageApp loaded successfully in VF page");
+           }
+         );
+     });
+  </script>
+</apex:page>

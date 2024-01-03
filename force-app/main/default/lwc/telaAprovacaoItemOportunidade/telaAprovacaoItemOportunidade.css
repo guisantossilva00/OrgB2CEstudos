@@ -1,0 +1,23 @@
+thead > tr {
+    background-color: black;
+    height: 72px; 
+    width: 100%;
+}
+
+th {
+    font-size: 16px;
+    text-align: center;
+    color: #fff; 
+}
+
+tbody > tr  {
+    background-color: #FFF;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.td{
+text-align: center;
+}

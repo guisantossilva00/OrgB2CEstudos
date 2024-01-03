@@ -1,0 +1,21 @@
+ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+ul > .numeracao, li {
+    color: #9A9A9A;
+    height: 22px;
+    width: 22px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+ul > .numeracao.currentPage, .numeracao:hover {
+    border-radius: 100%;
+    color: #fff;
+    background-color: #2D1437;
+}

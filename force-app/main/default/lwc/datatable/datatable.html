@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Datatable">
+        <lightning-datatable
+            key-field="uid"
+            data={dadosContato}
+            columns={colunas}
+            onrowselection={getSelecionado}>
+        </lightning-datatable>
+    </lightning-card>
+</template>

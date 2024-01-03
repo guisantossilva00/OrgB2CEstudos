@@ -1,0 +1,111 @@
+:host {
+    --gray: #F5F5F5;
+}
+
+.container-conteudo {
+    padding: 0 120px;
+}
+
+.voltar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+    width: 110px;
+    margin-top: 45px;
+}
+
+.voltar > i, p {
+    font-size: 22px;
+    color: #323232;
+}
+
+.formulario {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    
+}
+
+.formulario > div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 45%;
+}
+
+.formulario > div > label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #323232;
+}
+
+.formulario > div > input {
+    width: 100%;
+    height: 64px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    color: #323232;
+    font-size: 16px;
+    padding: 0 15px;
+}
+
+.formulario > div > select {
+    appearance: none;
+    width: 100%;
+    height: 64px;
+    border: none;
+    border-radius: 6px;
+    background-color:var(--gray);
+    color: #323232;
+    font-size: 16px;
+    padding: 0 15px;
+}
+
+select option{
+    color:#000;
+    background:#F5F5F5;
+  }
+
+.formulario > div > input:focus-visible, select:focus-visible {
+    outline: none;
+}
+
+.inputText {
+    position: relative;
+}
+
+.inputText > ul {
+    position: absolute;
+    top: 118px;
+    width: 100%;
+    border: 1px solid #32323281;
+    border-radius: 6px;
+    background-color: #F5F5F5;
+    color: #323232;
+    font-size: 16px;
+    
+}
+
+.inputText > ul > li {
+    padding: 0 15px;
+}
+
+.inputText > ul > li:hover {
+    color: #fff;
+    background-color: #323232;
+}
+
+button {
+    height: 64px;
+    width: 253px;
+    color: #fff; 
+    font-size: 20px;
+    background-color: #0AAA64;
+    border-radius: 8px;
+    border: none;
+    margin-top: 40px;
+}

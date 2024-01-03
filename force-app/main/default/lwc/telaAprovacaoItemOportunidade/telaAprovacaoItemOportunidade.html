@@ -1,0 +1,179 @@
+<template>
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Nome da Oportunidade</th>
+                <th>Nome da Conta</th>
+                <th>Nome do Produto</th>
+                <th>Quantidade</th>
+                <th>Preço de Venda</th>
+                <th>Preço Total</th>
+                <th>Data de Fechamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" name=""></td>
+                <td>Oportunidade</td>
+                <td>Conta</td>
+                <td>Produto</td>
+                <td>23</td>
+                <td>2323</td>
+                <td>323232</td>
+                <td>19/03/1023</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Nome da Conta</th>
+                <th>Nome da Oportunidade</th>
+                <th>Nome do Produto</th>
+                <th>Quantidade</th>
+                <th>Preço de Venda</th>
+                <th>Preço Total</th>
+                <th>Data de Fechamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick={mostrarFilho} class="cursor">
+                <td><i class="fa-solid fa-angle-down"></i></td>
+                <td colspan="7">Conta</td>
+            </tr>
+            <template lwc:if={filho}>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+            </template>
+            <tr onclick={mostrarFilho} class="cursor">
+                <td><i class="fa-solid fa-angle-down"></i></td>
+                <td colspan="7">Conta</td>
+            </tr>
+            <template lwc:if={filho}>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+            </template>
+            <tr onclick={mostrarFilho} class="cursor">
+                <td><i class="fa-solid fa-angle-down"></i></td>
+                <td colspan="7">Conta</td>
+            </tr>
+            <template lwc:if={filho}>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+            </template>
+            <tr onclick={mostrarFilho} class="cursor">
+                <td><i class="fa-solid fa-angle-down"></i></td>
+                <td colspan="7">Conta</td>
+            </tr>
+            <template lwc:if={filho}>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name=""></td>
+                    <td class="td">Conta</td>
+                    <td class="td">Oportunidade</td>
+                    <td class="td">Produto</td>
+                    <td class="td">23</td>
+                    <td class="td">2323</td>
+                    <td class="td">323232</td>
+                    <td class="td">19/03/1023</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+    
+</template>

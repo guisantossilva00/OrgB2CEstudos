@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,lightning:isUrlAddressable" access="global">
+	<aura:attribute name="idOpp" type="String"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <c:modal idOportunidade="{!v.idOpp}"></c:modal>
+</aura:component>

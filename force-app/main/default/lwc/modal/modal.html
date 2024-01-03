@@ -1,0 +1,255 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class=" fundo slds-modal slds-fade-in-open">
+        <div class="tamanho">
+            <div class="btn-fechar-modal">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={voltarOpp}>
+                    X
+                </button>
+            </div>
+            <div class="slds-modal__header">
+                <template lwc:if={listaProdutos}>
+                    <h1 class="slds-modal__title slds-hyphenate" tabindex="-1">Adicionar Produtos</h1>
+                </template>
+                <template lwc:else>
+                    <h1 class="slds-modal__title slds-hyphenate" tabindex="-1">Editar Produtos Selecionados</h1>
+                </template>
+            </div>
+
+            <div class="tabela slds-modal__content slds-p-around_medium">
+                <template lwc:if={listaProdutos}>
+                    <div class="slds-var-m-around_medium">
+                        <lightning-input
+                            onchange={getValuePesquisa}
+                            variant="label-hidden"
+                            placeholder="Pesquisar Produtos..."
+                            value={palavraChave}>
+                        </lightning-input>
+                    </div>
+                    <template lwc:if={buscaListaProdutos}>
+                        <lightning-datatable 
+                            key-field="Id" 
+                            data={produtosDadosAuxiliar} 
+                            columns={produtosColunas}
+                            onrowselection={temSelecionado} 
+                            selected-rows={preSelecionados}
+                            sorted-by={sortBy} 
+                            sorted-direction={sortDirection}
+                            onsort={doSorting}>
+                        </lightning-datatable>
+                    </template>
+                    <template lwc:else>
+                        <lightning-datatable 
+                            key-field="Id" 
+                            data={produtosDados} 
+                            columns={produtosColunas}
+                            onrowselection={temSelecionado} 
+                            selected-rows={preSelecionados}
+                            sorted-by={sortBy} 
+                            sorted-direction={sortDirection}
+                            onsort={doSorting}>
+                        </lightning-datatable>
+                    </template>
+                </template>
+                <template lwc:elseif={listaProdutosSelecionados}>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                        aria-label="Example default base table of Opportunities">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Nome do Produto">Nome do Produto</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Código do Produto">Código do Produto</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Quantidade"><abbr class="slds-required" title="required">* </abbr> Quantidade</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Preço de lista">Preço de Venda</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Desconto">Desconto</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Preço final"><abbr class="slds-required" title="required">* </abbr> Preço final</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={produtosSelecionados} for:item="produto">
+                                <tr class="slds-hint-parent" key={produto.id}>
+                                    <th data-label="Nome do Produto" scope="row">
+                                        <div class="slds-truncate" title={produto.Name}>
+                                            {produto.Name}
+                                        </div>
+                                    </th>
+                                    <td data-label="Código do Produto">
+                                        <div class="slds-truncate" title={produto.ProductCode}>
+                                            {produto.ProductCode}
+                                        </div>
+                                    </td>
+                                    <td data-label="Quantidade">
+                                        <div class="slds-truncate" title="Quantidade">
+                                            <lightning-input 
+                                                type="number" 
+                                                variant="label-hidden"
+                                                name="quantidade"
+                                                class="validar"
+                                                min="1"
+                                                message-when-range-underflow="Quantidade Invalida."
+                                                data-id={produto.Id} 
+                                                value={produto.Quantity} 
+                                                onchange={getValueQuantity}
+                                                required>
+                                            </lightning-input>
+                                        </div>
+                                    </td>
+                                    <td data-label="Preço de Venda">
+                                        <div class="slds-truncate" title={produto.PrecoVenda}>
+                                            <template lwc:if={produto.PrecoVenda}>
+                                                <div class="slds-truncate" title={produto.PrecoVenda}>                                                    
+                                                    <lightning-formatted-number value={produto.PrecoVenda} format-style="currency" currency-code={produto.Moeda}></lightning-formatted-number>
+                                                </div>
+                                            </template>
+                                            <template lwc:else>
+                                                <button class="slds-button slds-button_neutral btn_busca_preco" onclick={buscaPrecoProduto} data-id={produto.Id}>
+                                                    Buscar Preço
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </td>
+                                    <td data-label="Desconto">
+                                        <div class="slds-truncate" title={produto.Desconto}>
+                                            <!-- <template lwc:if={produto.PrecoVenda}> -->
+                                                <lightning-input 
+                                                    type="number" 
+                                                    variant="label-hidden"
+                                                    formatter="percent-fixed"
+                                                    class="validar"
+                                                    min="0"
+                                                    max="99"
+                                                    step=".01"
+                                                    message-when-range-overflow="Porcentagem Inválida."
+                                                    message-when-range-underflow="Porcentagem Inválida."
+                                                    data-id={produto.Id} 
+                                                    value={produto.Desconto} 
+                                                    onchange={getValueDesconto} 
+                                                    disabled={produto.TemDesconto}
+                                                    required>
+                                                </lightning-input>
+                                            <!-- </template> -->
+                                        </div>
+                                    </td>
+                                    <td data-label="Preço final">
+                                        <div class="slds-truncate" title={produto.PrecoFinal}>
+                                            <!-- <template lwc:if={produto.PrecoVenda}> -->
+                                                <lightning-input 
+                                                    type="number" 
+                                                    class="validar"
+                                                    variant="label-hidden"
+                                                    min="1"
+                                                    message-when-range-overflow="Preço Inválido."
+                                                    step=".01"
+                                                    data-id={produto.Id} 
+                                                    value={produto.PrecoFinal} 
+                                                    onchange={getValuePrecoFinal} 
+                                                    disabled={produto.TemDesconto}
+                                                    required>
+                                                </lightning-input>
+                                            <!-- </template> -->
+                                        </div>
+                                    </td>
+                                    <td data-label="Preço final">
+                                        <div class="slds-truncate" title={produto.PrecoFinal}>
+                                            <lightning-button-icon icon-name="utility:delete" class='delete' onclick={deleteProduto} data-id={produto.Id}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </template>
+            </div>
+
+            <div class="slds-modal__footer slds-modal__footer_directional">
+                <button class="slds-button slds-button_neutral" onclick={voltarOpp}>Cancelar</button>
+                <template lwc:if={listaProdutosSelecionados}>
+                    <button class="slds-button slds-button_neutral" onclick={parteSelecionar}>Voltar</button>
+                </template>
+
+                <template lwc:if={listaProdutosSelecionados}>
+                    <button class="slds-button slds-button_brand" onclick={insertProduto}>Salvar</button>
+                </template>
+                <template lwc:else>
+                    <button class="slds-button slds-button_brand" onclick={getProdutosSelecionados} disabled={disabledButton}>Avançar</button>
+                </template>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+
+    <template lwc:if={modalBuscaPreco}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open background">
+            <div class="fundo-modal"></div>
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"  onclick={abrirFecharModal}>
+                        X
+                </button>
+                <div class="slds-modal__header">
+                    <h1 class="slds-modal__title slds-hyphenate">Busca Preço</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <template lwc:if={precoProduto}>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                        aria-label="Example default base table of Opportunities">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Selecionar"></div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Nome da Tabela">Nome da Tabela</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Preço do Produto">Preço do Produto</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={precoProduto} for:item="preco">
+                                <tr class="slds-hint-parent" key={preco.id}>
+                                    <th data-label="Nome da Tabela" scope="row">
+                                        <div class="slds-truncate" title={preco.TabelaPrecos__r.Name}>
+                                            <input type="radio" id={preco.id} name="precoTabela" aria-describedby="error_01" value={preco.Produto__c} data-preco={preco.Preco__c} data-currency={preco.CurrencyIsoCode} data-desconto={preco.TabelaPrecos__r.TemDesconto__c}>
+                                        </div>
+                                    </th>
+                                    <th data-label="Nome da Tabela">
+                                        <div class="slds-truncate" title={preco.TabelaPrecos__r.Name}>
+                                            <label for={preco.id}>{preco.TabelaPrecos__r.Name}</label>
+                                        </div>
+                                    </th>
+                                    <td data-label="Preço do Produto">
+                                        <div class="slds-truncate" title={preco.Preco__c}>
+                                            <lightning-formatted-number value={preco.Preco__c} format-style="currency" currency-code={preco.CurrencyIsoCode}></lightning-formatted-number>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>               
+                    </template>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                        onclick={abrirFecharModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={savePrecoProduto}>Salvar</button>
+                </div>
+            </div>
+            
+        </section>
+    </template>
+</template>

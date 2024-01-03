@@ -1,0 +1,67 @@
+<template>
+    <div class="header">        
+            <lightning-button label="Aprovar" variant="success" icon-name="utility:save" onclick={aprovarCatalogos}></lightning-button>
+            <lightning-button label="Reprovar" variant="destructive" icon-name="utility:delete"></lightning-button>
+            {retornogetUserId.data}
+    </div>
+    <template lwc:if={catalogoDados}>
+        <lightning-datatable
+            key-field="Id"
+            data={catalogoDados}
+            columns={catalogoColunas}>
+        </lightning-datatable>
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Catalogo</th>
+                    <th>Mercado</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                    <template for:each={catalogoDados} for:item="solicitacao">
+
+                            <tr key={solicitacao.Id} class="tr-stilo" onclick={troca} > 
+                                <td></td>
+                                <td colspan="4">{solicitacao.Name}</td>             
+                            </tr>
+                            <template lwc:if={mudou}>
+
+                                <tr key={solicitacao.Id}>
+                                    <td><input type="checkbox" name="" ></td>
+                                    <td>{solicitacao.Name}</td>
+                                    <td>{solicitacao.Mercado__c}</td>
+                                    <td>{solicitacao.Status__c}</td>
+                                </tr>
+                                <tr key={solicitacao.Id}>
+                                    <td><input type="checkbox" name="" ></td>
+                                    <td>{solicitacao.Name}</td>
+                                    <td>{solicitacao.Mercado__c}</td>
+                                    <td>{solicitacao.Status__c}</td>
+                                </tr>
+                                <tr key={solicitacao.Id}>
+                                    <td><input type="checkbox" name="" ></td>
+                                    <td>{solicitacao.Name}</td>
+                                    <td>{solicitacao.Mercado__c}</td>
+                                    <td>{solicitacao.Status__c}</td>
+                                </tr>
+                            </template>
+                            <tr key={solicitacao.Id} class="tr-stilo" > 
+                                <td colspan="3">{solicitacao.Name}</td>             
+                            </tr>
+                            <tr key={solicitacao.Id}>
+                                <td><input type="checkbox" name="" ></td>
+                                <td>{solicitacao.Mercado__c}</td>
+                                <td>{solicitacao.Status__c}</td>
+                            </tr>
+                    </template>
+                
+            </tbody>
+        </table> -->
+    </template>
+    <template lwc:elseif={error}>
+        <h1>Não tem catálogo para Aprovação</h1>
+    </template>
+</template>

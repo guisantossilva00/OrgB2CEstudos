@@ -1,0 +1,157 @@
+<template>
+    <div class="container">
+        <section class="cabecalho">
+            <figure>
+                <img src={fundoFerias} alt="imagem Férias na praia">
+                <div></div>
+            </figure>
+
+            <h2>Solicitação de Férias</h2>
+        </section>
+
+        <template lwc:if={tabelaFormSolicitacao}>
+            <div class="container-conteudo">
+                <section class="pesquisa">
+                    <div class="pesqusia-input">
+                        <input type="text" placeholder="Pesquisar" onkeyup={changeInputPesquisa} value={palavraChave}>
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <button onclick={changeTabelaFormSolicitacao} disabled={disabledBTN}>+ solicitar férias</button>
+                </section>
+
+                <section class="tabela-solicitacoes">
+                    <div class="titulo-filtro">
+                        <h2>Solicitações</h2>
+
+                        <div class="container-filtro">
+                            <div class="filtro" onclick={abrirFiltroPesquisa}>
+                                <p>filtrar por status</p>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <template lwc:if={modalFiltroPesquisa}>
+                                <ul>
+                                    <li class="filtro-selecionado" onclick={getFiltroStatus} data-status="Todos">Todos <i class="fa-solid fa-check"></i></li>
+                                    <li onclick={getFiltroStatus} data-status="Aguardando">Aguardando</li>
+                                    <li onclick={getFiltroStatus} data-status="Aprovado">Aprovado</li>
+                                    <li onclick={getFiltroStatus} data-status="Reprovado">Reprovado</li>
+                                </ul>
+                            </template>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Id vaga</th>
+                                <th>Solicitante</th>
+                                <th>Criado por</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={visibleSolicitacoesFerias}>
+                                <template for:each={visibleSolicitacoesFerias} for:item="solicitacao">
+                                    <tr key={solicitacao.Id} class="tr-stilo"> 
+                                        <td>{solicitacao.Name}</td>
+                                        <td>{solicitacao.NomeColaborador__r.Name}</td>
+                                        <td>{solicitacao.GestorImediato__r.Name}</td>
+                                        <td>
+                                            <lightning-formatted-date-time
+                                                value={solicitacao.CreatedDate}
+                                                year="numeric"
+                                                month="numeric"
+                                                day="numeric">
+                                            </lightning-formatted-date-time>
+                                        </td>
+                                        <td class="status">
+                                            <span class={solicitacao.Status__c} >{solicitacao.Status__c}</span>
+                                        </td>
+                                        <td><i class="fa-solid fa-print"></i></td>
+                                        <td><i class="fa-regular fa-eye"></i></td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+
+                    <!-- Tabela agrupado -->
+                    <!-- <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Criado por</th>
+                                <th scope="col">Id vaga</th>
+                                <th scope="col">Solicitante</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">&nbsp;</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={groupSolicitacoesFerias}>
+                                <template for:each={groupSolicitacoesFerias} for:item="solicitacao">
+                                    <tr key={solicitacao.colaboradorRecord.Id}>
+                                        <td rowspan={solicitacao.sizeTotal}>{solicitacao.colaboradorRecord.Name}</td>
+                                    </tr>
+                                <template for:each={solicitacao.solicitacoesList} for:item="ferias">           
+                                        <tr key={ferias.Id} class="tr-stilo">                             
+                                            <td><a href="\'/{ferias.Id}\'">{ferias.Name}</a></td>
+                                            <td>{ferias.NomeColaborador__r.Name}</td>
+                                            <td>
+                                                <lightning-formatted-date-time
+                                                    value={ferias.CreatedDate}
+                                                    year="numeric"
+                                                    month="numeric"
+                                                    day="numeric">
+                                                </lightning-formatted-date-time>
+                                            </td>
+                                            <td class="status">
+                                                <span class={ferias.Status__c}>{ferias.Status__c}</span>
+                                            </td>
+                                            <td><i class="fa-solid fa-print"></i></td>
+                                            <td><i class="fa-regular fa-eye"></i></td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table> -->
+                </section>
+
+                <section class="exporta-page">
+                    <button><i class="fa-regular fa-share-from-square"></i> Exportar</button>
+
+                    <div>
+                        <c-paginacao-solicitacoes-ferias
+                            records={solicitacoesFerias}
+                            onupdate={updateHandler}>                        
+                        </c-paginacao-solicitacoes-ferias>
+                    </div>
+                </section>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <c-form-solicitacoes-ferias
+                onvoltartabelasolicitacao={changeTabelaFormSolicitacao}>
+    
+            </c-form-solicitacoes-ferias>
+        </template>        
+
+        <section class="footer">
+            <div class="container-conteudo">
+                <p>©2023 Viterra. All rights reserved</p>
+                
+                <div>
+                    <p>Privacy & Policy</p>
+                    <p>Terms & Condition</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>
